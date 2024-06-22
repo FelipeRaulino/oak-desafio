@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: produto-cadastro-listagem
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+
+cors:
+  originPatterns: http://localhost:5173
