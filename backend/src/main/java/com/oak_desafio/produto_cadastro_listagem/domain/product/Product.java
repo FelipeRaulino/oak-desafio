@@ -1,4 +1,4 @@
-package com.oak_desafio.produto_cadastro_listagem.domain;
+package com.oak_desafio.produto_cadastro_listagem.domain.product;
 
 import jakarta.persistence.*;
 

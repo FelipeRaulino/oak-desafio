@@ -2,7 +2,7 @@ package com.oak_desafio.produto_cadastro_listagem.services;
 
 import com.oak_desafio.produto_cadastro_listagem.data.dtos.v1.product.request.ProductRequestDTO;
 import com.oak_desafio.produto_cadastro_listagem.data.dtos.v1.product.response.ProductResponseDTO;
-import com.oak_desafio.produto_cadastro_listagem.domain.Product;
+import com.oak_desafio.produto_cadastro_listagem.domain.product.Product;
 import com.oak_desafio.produto_cadastro_listagem.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
