@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import React, { useCallback, useEffect, useState } from 'react';
 import './App.css';
 import { Button, Divider, Flex, Form, Input, Modal, Popconfirm, Select, Space, Table, notification } from 'antd';
@@ -7,16 +8,19 @@ import Title from 'antd/es/typography/Title';
 
 const App = () => {
   const [products, setProducts] = useState([]);
-
-  const [form] = Form.useForm();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingProduct, setEdittingProduct] = useState(null);
-
+  const [loading, setLoading] = useState(true);
+  
+  const [form] = Form.useForm();
   const [api, contextHolder] = notification.useNotification();
 
   const getAllProducts = useCallback(() => {
     axios.get('/api/v1/product')
-      .then(response => setProducts(response.data))
+      .then(response => {
+        setProducts(response.data);
+        setLoading(false);
+      })
       .catch(error => console.log(error));
   }, [setProducts]);
 
@@ -48,7 +52,7 @@ const App = () => {
   };
 
   const handleOnDelete = (record) => {
-  axios.delete(`/api/v1/suppliers/${record.id}`)
+  axios.delete(`/api/v1/product/${record.id}`)
     .then(response => {
       if(response.status === 204){
         setProducts(prevProducts => prevProducts.filter(product => product.id !== record.id));
@@ -104,6 +108,9 @@ const App = () => {
     setIsModalOpen(true);
   };
 
+  const formatPrice = (price) => {
+    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(price);
+  };
 
   const columns = [
     {
@@ -115,7 +122,10 @@ const App = () => {
       title: 'Valor',
       dataIndex: 'price',
       key: 'price',
-      width: 200
+      width: 200,
+      defaultSortOrder: 'ascend',
+      sorter: (a, b) => a.price - b.price,
+      render: (text, record) => formatPrice(record.price),
     },
     {
       title: 'Ação',
@@ -142,11 +152,18 @@ const App = () => {
       {contextHolder}
       <div className="app-container">
         {contextHolder}
-        <Title>Lista de Fornecedores</Title>
+        <Title>Lista de Produtos</Title>
         <Divider />
         <Flex gap="middle" vertical>
-          <Button type="primary" onClick={showModal}>Adicionar novo fornecedor</Button>
-          <Table dataSource={products && transformedProducts} columns={columns} />
+          <Button type="primary" onClick={showModal}>Adicionar novo produto</Button>
+          <Table 
+            dataSource={products && transformedProducts} 
+            columns={columns} 
+            showSorterTooltip={{
+              target: 'sorter-icon'
+            }}
+            loading={loading}
+          />
         </Flex>
         <Modal
           title={editingProduct ? 'Editar Produto' : 'Adicionar Produto'}
@@ -223,7 +240,7 @@ const App = () => {
             ]}
           >
             <Select
-              placeholder="Função(ões)"
+              placeholder="Disponibilidade"
               style={{
                 width: 120,
               }}
