@@ -53,7 +53,7 @@ public class ProductControllerTest extends AbstractIntegrationTest {
                 .when()
                 .post()
                 .then()
-                .statusCode(200)
+                .statusCode(201)
                 .extract()
                 .body()
                 .as(ProductResponseDTO.class);
