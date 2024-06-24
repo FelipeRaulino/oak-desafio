@@ -13,4 +13,4 @@ spring:
       ddl-auto: none
 
 cors:
-  originPatterns: http://localhost:5173
+  originPatterns: http://localhost:5173,https://oak-desafio.vercel.app
