@@ -29,7 +29,7 @@ Instruções para configurar e executar a aplicação localmente:
 2. Configure o arquivo `.env` com as variáveis de ambiente necessárias. **Exemplo**:
 
    ```env
-   DATABASE_URL=jdbc:postgresql://localhost:5432/oak-desafio-db-example
+    DATABASE_URL=jdbc:postgresql://localhost:5432/oak-desafio-db-example
    DATABASE_USERNAME=user1
    DATABASE_PASSWORD=user123
    ```
@@ -55,7 +55,7 @@ Instruções para configurar e executar a aplicação localmente:
 
 2. Configure o arquivo `.env` com as variáveis de ambiente necessárias. **Exemplo**:
 
-   ```bash
+   ```env
      VITE_BASE_URL=http://localhost:8080
    ```
 
